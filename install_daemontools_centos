@@ -1,0 +1,30 @@
+1. Install wget gcc and wget
+    yum install gcc wget
+
+2. Create a folder setup and wget the source
+   mkdir -p /package
+   chmod 1755 /package
+   cd /package
+   wget http://cr.yp.to/daemontools/daemontools-0.76.tar.gz
+   tar -xzvf daemontools-0.76.tar.gz
+   rm daemontools-0.76.tar.gz
+
+3. Install the daemontools
+   echo gcc -O2 -include /usr/include/errno.h > src/conf-cc
+   ./package/install
+  
+4. Fix Deamontools for CentOS 6.x. To do that simply remove the added line from /etc/inittab then issue this:
+    echo "start on runlevel [12345]" > /etc/init/svscan.conf
+    echo "respawn" >> /etc/init/svscan.conf
+    echo "exec /command/svscanboot" >> /etc/init/svscan.conf
+   
+5. Start svscan
+    initctl reload-configuration
+    initctl start svscan
+    
+6. That’s it. Now you can check it using command below:
+    ps -ef|grep svscan
+
+7. Creating services see this http://isotope11.com/blog/manage-your-services-with-daemontools
+
+8. Daemontools chef cookbook for centos https://github.com/CPAN-API/prepan-cookbooks/tree/master/site-cookbooks/daemontools

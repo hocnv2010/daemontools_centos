@@ -1,6 +1,6 @@
 CentOS 7 uses systemd
 
-Create a new file /etc/systemd/system/daemontools.service, with the startup code in it:
+1.Create a new file /etc/systemd/system/daemontools.service, with the startup code in it:
 
 [Unit]
 Description=daemontools Start supervise
@@ -16,13 +16,13 @@ TimeoutSec=0
 WantedBy=multi-user.target
 
 
-Start the service:
+2. Start the service:
 
-systemctl start daemontools.service
+  systemctl start daemontools.service
 
-Test that it is running:
-systemctl status daemontools.service
+3. Test that it is running:
+  systemctl status daemontools.service
 
-Enable it to start at boot:
+4. Enable it to start at boot:
 
-systemctl enable daemontools.service
+  systemctl enable daemontools.service
